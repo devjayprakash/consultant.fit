@@ -1,8 +1,10 @@
 import Navbar from '@/components/navbar';
+import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Provider from './api/_trpc/Provider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,11 +23,14 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={cn(inter.className, 'pt-12')}>
-          <div className="min-h-screen">
-            <Navbar />
-            {/* Todo: add a footer */}
-            <main>{children}</main>
-          </div>
+          <Provider>
+            <div className="min-h-screen">
+              <Navbar />
+              {/* Todo: add a footer */}
+              <main>{children}</main>
+              <Toaster />
+            </div>
+          </Provider>
         </body>
       </html>
     </ClerkProvider>

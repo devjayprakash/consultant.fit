@@ -11,12 +11,22 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  email       String   @unique
-  clerkId     String
-  first_name  String
-  last_name   String
-  profile_pic String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  id                  String   @id @default(uuid())
+  email               String   @unique
+  clerkId             String   @unique
+  first_name          String
+  last_name           String
+  profile_pic         String
+  github_access_token String?
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+}
+
+model user_repo_link {
+  user_id    String
+  repo_id    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([user_id, repo_id])
 }
