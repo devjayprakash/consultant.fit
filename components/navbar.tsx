@@ -5,14 +5,13 @@ import { buttonVariants } from './ui/button';
 
 const Navbar = () => {
   return (
-    <div className="fixed container mx-auto bg-white top-0 left-0 right-0">
-      <nav className="flex justify-between items-center py-4">
+    <div className="fixed  bg-white top-0 left-0 right-0">
+      <nav className="flex justify-between items-center py-4 container mx-auto">
         <Logo />
         <div>
           <SignedIn>
             <UserButton />
           </SignedIn>
-
           <SignedOut>
             <div className="space-x-3">
               <Link

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn(inter.className, 'pt-12')}>
+        <body className={cn(inter.className, 'bg-gray-50')}>
           <Provider>
             <div className="min-h-screen">
               <Navbar />
