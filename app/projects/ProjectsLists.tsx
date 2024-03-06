@@ -5,13 +5,18 @@ import Empty from '@/components/Empty';
 import PageWrapper from '@/components/PageWrapper';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Project } from '@prisma/client';
 import { ForwardIcon, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { trpc } from '../api/_trpc/client';
 
-const ProjectsPage = ({ initialData }: { initialData: Project[] }) => {
+interface PartialProject {
+  id: string;
+  name: string;
+  description: string;
+}
+
+const ProjectsPage = ({ initialData }: { initialData: PartialProject[] }) => {
   const {
     data: projects,
     error: projectsError,

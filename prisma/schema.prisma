@@ -25,23 +25,49 @@ model User {
 }
 
 model Project {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
   name        String
   userId      String
-  belongsTo   User     @relation(fields: [userId], references: [id])
+  belongsTo   User         @relation(fields: [userId], references: [id])
   description String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
   Sprint      Sprint[]
+  TaskStatus  TaskStatus[]
 }
 
 model Sprint {
   id         String   @id @default(uuid())
   name       String
   projectId  String
+  start_date DateTime
+  end_date   DateTime
   belongsTo  Project  @relation(fields: [projectId], references: [id])
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  Task       Task[]
+}
+
+model Task {
+  id           String     @id @default(uuid())
+  name         String
+  description  String
+  status       TaskStatus @relation(fields: [taskStatusId], references: [id])
+  sprintId     String?
+  belongsTo    Sprint?    @relation(fields: [sprintId], references: [id])
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @updatedAt
+  taskStatusId String
+}
+
+model TaskStatus {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  project_id String
+  belongsTo  Project  @relation(fields: [project_id], references: [id])
+  Task       Task[]
 }
 
 model user_repo_link {

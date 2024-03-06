@@ -4,8 +4,9 @@ import { auth } from '@clerk/nextjs/server';
 
 const caller = t.createCallerFactory(appRouter);
 
-const c_auth = auth();
-
-export const trpcServer = caller({
-  clerk_id: c_auth.userId || '',
-});
+export const trpcServer = () => {
+  const c_auth = auth();
+  return caller({
+    clerk_id: c_auth.userId || '',
+  });
+};

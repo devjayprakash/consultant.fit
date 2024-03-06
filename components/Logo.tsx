@@ -13,7 +13,7 @@ const Logo = () => {
           width={40}
           height={40}
         />
-        <div className="font-bold">Delivery plan</div>
+        <div className="font-bold">consultant</div>
       </div>
     </Link>
   );

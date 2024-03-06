@@ -1,5 +1,5 @@
-function ProjectsDashboard() {
-  return <div>ProjectsDashboard</div>;
+async function ProjectsDashboard() {
+  return <div>dashboard</div>;
 }
 
 export default ProjectsDashboard;
