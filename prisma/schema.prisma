@@ -10,18 +10,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserStatus {
+  active
+  inactive
+  deleted
+}
+
 model User {
-  id                  String    @id @default(uuid())
-  email               String    @unique
-  clerkId             String    @unique
+  id                  String         @id @default(uuid())
+  email               String         @unique
+  clerkId             String         @unique
   first_name          String
   last_name           String
   profile_pic         String
   github_access_token String?
-  created_at          DateTime  @default(now())
+  created_at          DateTime       @default(now())
   active_project_id   String?
-  updated_at          DateTime  @updatedAt
+  status              UserStatus     @default(active)
+  updated_at          DateTime       @updatedAt
   Project             Project[]
+  UserSettings        UserSettings[]
 }
 
 model Project {
@@ -68,6 +76,17 @@ model TaskStatus {
   project_id String
   belongsTo  Project  @relation(fields: [project_id], references: [id])
   Task       Task[]
+}
+
+model UserSettings {
+  id                      String   @id @default(uuid())
+  userId                  String
+  belongsTo               User     @relation(fields: [userId], references: [id])
+  created_at              DateTime @default(now())
+  updated_at              DateTime @updatedAt
+  notfication             Boolean  @default(true)
+  auto_sprint_name        Boolean  @default(true)
+  default_sprint_duration Int      @default(14)
 }
 
 model user_repo_link {
